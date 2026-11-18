@@ -43,6 +43,7 @@ This add-on was made by Jakub Majewski.
 Heretic ][ and its model format is by Raven Software.  
 Blender is by the Blender Foundation.  
 I used the following as reference:  
+* GwynFlex by Gwynhalla from the 90s was the original inspiration behind this add-on (no source was ever released, and the author hasn't been around for decades).  
 * Kingpin MD2/MDX addon by Hypov8; their GL Commands builder was very useful to me.  
 *  `Blender_BSP_Importer` by SomaZ; the way it converted between MD3 tags and empty objects was very useful here.  
 * An old program known as MipMaker, by ViTalSoftware; to understand the structure of the M8 texture format.  
