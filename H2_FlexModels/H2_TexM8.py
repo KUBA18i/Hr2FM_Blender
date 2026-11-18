@@ -16,9 +16,9 @@ class m8_colordef:
 class m8_header:
     version: int = 0
     name: str = ""  #32 char limit
-    Width: list = field(default_factory=list)  #array of uint16_t
-    Height: list = field(default_factory=list)  #array of uint16_t
-    Offsets: list = field(default_factory=list)  #array of uint16_t
+    Width: list = field(default_factory=list)  #array of uint32_t
+    Height: list = field(default_factory=list)  #array of uint32_t
+    Offsets: list = field(default_factory=list)  #array of uint32_t
     AnimName: str = ""  #32 char limit
     palette: list = field(default_factory=list)  #array of m8_colordef
     Flags: int = 0
@@ -33,9 +33,9 @@ def ReadM8(inpath: str | Path):
     with (open(inpath, "rb") as f):
         NewM8Header.version = struct.unpack("i", f.read(4))[0]
         NewM8Header.name = f.read(32).split(b"\x00", 1)[0].decode("ascii", errors="ignore").strip()
-        NewM8Header.Width = list(struct.unpack(f"{M8MIPS}i", f.read(M8MIPS*4)))
-        NewM8Header.Height = list(struct.unpack(f"{M8MIPS}i", f.read(M8MIPS*4)))
-        NewM8Header.Offsets = list(struct.unpack(f"{M8MIPS}i", f.read(M8MIPS*4)))
+        NewM8Header.Width = list(struct.unpack(f"{M8MIPS}I", f.read(M8MIPS*4)))
+        NewM8Header.Height = list(struct.unpack(f"{M8MIPS}I", f.read(M8MIPS*4)))
+        NewM8Header.Offsets = list(struct.unpack(f"{M8MIPS}I", f.read(M8MIPS*4)))
         NewM8Header.AnimName = f.read(32).split(b"\x00", 1)[0].decode("ascii", errors="ignore").strip()
         for _ in range(256):
             colour =  m8_colordef()
@@ -68,9 +68,9 @@ def WriteM8(outpath: str | Path, name: str, mipmaps: list, palette: np.ndarray):
     with open(outpath, "wb") as f:
         f.write(struct.pack("i", 2))
         f.write(name.encode("ascii", errors="ignore").ljust(32, b"\x00")[:32])
-        f.write(struct.pack(f"{M8MIPS}i", *widths))
-        f.write(struct.pack(f"{M8MIPS}i", *heights))
-        f.write(struct.pack(f"{M8MIPS}i", *offsets))
+        f.write(struct.pack(f"{M8MIPS}I", *widths))
+        f.write(struct.pack(f"{M8MIPS}I", *heights))
+        f.write(struct.pack(f"{M8MIPS}I", *offsets))
         f.write(b"Exported by Python script".ljust(32, b"\x00"))
         f.write(np.asarray(palette, dtype=np.uint8).tobytes())
         f.write(struct.pack("3i", 0, 0, 0))
