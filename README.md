@@ -19,7 +19,7 @@ Open links to see videos of the model in action:
 * You're given the option to import UVs from either the Triangle/UV structs, or from the GL Commands block.  
 * You can either import a static mesh, or animated with shape keys.  
 * If importing a static mesh, the base frame will be the only one that's imported. Otherwise, all shape keys will based on it.  
-* If the Import Textures option is checked, the program will take the model's skin paths and try to find their corresponding .M8 files in the same folder as the model.  
+* If the Import Textures option is checked, the program will take the model's skin paths and try to find their corresponding .M8 files in the same folder as the model. If importing fails, the texture can be added later; I recommend [my .M8 conversion script](https://gist.github.com/KUBA18i/98a82894ced1c91fc0a2be5753471f3f) to be able to import them directly.   
 * If importing animations, you have the option to populate the timeline with markers, depending on the frame names.  
 * Mesh nodes will be imported as vertex groups, with a naming scheme of `__FM_Meshnode_<number>`. Clusters, if importing a skeleton, will also be imported, named  `__FM_Cluster_<number>`.
 * If importing References or the Skeleton, the reference placements and joints will be imported as animated empties, respectively named `__FM_Ref_<number>_<name>` and `__FM_Joint_<number>_<name>`.
